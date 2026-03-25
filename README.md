@@ -1,14 +1,14 @@
-#Repositório de Matheus
+# Repositório de Matheus
 
 Este repositório tem como objetivo armazenar e organizar as atividades desenvolvidas na disciplina de Engenharia de Prompt - Fundamentos.
 
 Aqui você encontrará exercícios, práticas e experimentações voltadas ao uso eficiente de prompts, com foco em melhorar a comunicação com modelos de inteligência artificial.
 
-##Objetivos
+## Objetivos
 Desenvolver habilidades em engenharia de prompt
 Explorar diferentes formas de interação com IA
 Documentar aprendizados ao longo da disciplina
-###Conteúdo
+### Conteúdo
 
 O repositório pode conter:
 
@@ -20,6 +20,6 @@ O repositório pode conter:
 
 Este repositório faz parte de um processo de aprendizado contínuo, portanto o conteúdo pode ser atualizado e melhorado ao longo do tempo.
 
-####Autor
+#### Autor
 
 Matheus Teixeira
