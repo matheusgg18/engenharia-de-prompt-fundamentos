@@ -13,9 +13,13 @@ Documentar aprendizados ao longo da disciplina
 O repositório pode conter:
 
 📄Exercícios práticos
+
 💡Exemplos de prompts
+
 🧪Testes e experimentações
+
 📝Anotações e aprendizados
+
 📌Observações
 
 Este repositório faz parte de um processo de aprendizado contínuo, portanto o conteúdo pode ser atualizado e melhorado ao longo do tempo.
