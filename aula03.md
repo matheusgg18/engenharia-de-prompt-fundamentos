@@ -24,6 +24,7 @@ Além disso, é um alimento que eles realmente gostam.
 Se quiser, posso te mostrar como esse tipo de raciocínio cai em prova ou em lógica de linguagem 👍
 
 Etapa 3 -
+
 <img width="933" height="514" alt="image" src="https://github.com/user-attachments/assets/94c68511-529d-4392-a53f-8edf835ec862" />
 
 A tokenização ajuda Ia á entender o que nós seres humanos, assim ele divide atividade assim resolvendo apsso a passo ate chegar no resultado. 
