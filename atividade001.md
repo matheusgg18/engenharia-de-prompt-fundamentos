@@ -4,26 +4,38 @@ resposta.
 ### Pergunta: O que e Cortana?
 #### Resposta: 
 A Cortana é uma assistente virtual criada pela Microsoft — tipo a Siri da Apple ou o Google Assistente.
-🧠 O que ela faz?
+
+## 🧠 O que ela faz?
+
 Ela foi feita para ajudar você no computador ou celular com tarefas como:
+
 Responder perguntas
+
 Definir lembretes
+
 Abrir programas
+
 Mostrar previsão do tempo
+
 Fazer pesquisas na internet
-💻 Onde ela existia?
-4
+
+## 💻 Onde ela existia?
+
 Principalmente no Windows 10
+
 Também teve versão para celular (Android e iOS)
-⚠️ E hoje em dia?
+
+## ⚠️ E hoje em dia?
+
 A Cortana praticamente foi descontinuada. A própria Microsoft deixou de investir nela e substituiu por soluções mais avançadas com IA (como o novo Copilot).
-👉 Ou seja: ela foi importante por um tempo, mas hoje quase não é mais usada.
+
+# 👉 Ou seja: ela foi importante por um tempo, mas hoje quase não é mais usada.
 Se quiser, posso te explicar a diferença entre a Cortana e as IAs atuais tipo ChatGPT ou Copilot — muda bastante coisa.
 
-segunda pergunta :
+# segunda pergunta :
 Atue como um professor. explique o que e cortana para um inicianete usando analogia com esportes em 2 paragrafos 
 
-Resposta:
+## Resposta:
 Pensa na Cortana como um jogador reserva inteligente no seu time. Você está jogando (usando o computador), e quando precisa de ajuda — tipo lembrar de uma jogada, buscar uma informação ou executar uma tarefa —
 esse jogador entra em campo por você e resolve rápido. Em vez de você correr atrás de tudo manualmente, ele já sabe o que fazer: abre programas, responde perguntas e organiza tarefas, como se fosse alguém do time que entende bem o jogo e te dá suporte o tempo todo.
 
