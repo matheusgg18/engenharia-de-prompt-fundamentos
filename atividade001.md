@@ -1,7 +1,7 @@
-Prompt Genérico: Faça uma pergunta simples (Ex: "O que é Machine Learning?") e cole a
+# Atividade 1
+### Prompt Genérico: Faça uma pergunta simples (Ex: "O que é Machine Learning?") e cole a
 resposta.
- 
-Pergunta: O que e Cortana?
+### Pergunta: O que e Cortana?
 Resposta: 
 A Cortana é uma assistente virtual criada pela Microsoft — tipo a Siri da Apple ou o Google Assistente.
 🧠 O que ela faz?
