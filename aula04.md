@@ -1,3 +1,5 @@
+#ATIVIDADE AULA 4
+
 <img width="795" height="802" alt="image" src="https://github.com/user-attachments/assets/bc3210d5-09f2-434d-a061-59eb1aabb022" />
 <img width="688" height="800" alt="image" src="https://github.com/user-attachments/assets/99f3e218-cb65-4536-86fe-c55a606b8fd5" />
 <img width="683" height="743" alt="image" src="https://github.com/user-attachments/assets/d6e18470-8abb-47bb-af47-da5b791f4c52" />
@@ -58,22 +60,18 @@ o codigo:
       <button onclick="appendValue('/')" class="operator">/</button>
       <button onclick="appendValue('*')" class="operator">*</button>
       <button onclick="appendValue('-')" class="operator">-</button>
-
       <button onclick="appendValue('7')">7</button>
       <button onclick="appendValue('8')">8</button>
       <button onclick="appendValue('9')">9</button>
       <button onclick="appendValue('+')" class="operator">+</button>
-
       <button onclick="appendValue('4')">4</button>
       <button onclick="appendValue('5')">5</button>
       <button onclick="appendValue('6')">6</button>
       <button onclick="appendValue('.')">.</button>
-
       <button onclick="appendValue('1')">1</button>
       <button onclick="appendValue('2')">2</button>
       <button onclick="appendValue('3')">3</button>
       <button onclick="calculate()" class="equal">=</button>
-
       <button onclick="appendValue('0')">0</button>
     </div>
   </div>
@@ -118,7 +116,6 @@ o codigo:
       height: 100vh;
       background: #f5f5f5;
     }
-
     .container {
       background: white;
       padding: 20px;
@@ -126,7 +123,6 @@ o codigo:
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
     }
-
     input {
       width: 80px;
       padding: 10px;
@@ -134,7 +130,6 @@ o codigo:
       font-size: 18px;
       text-align: center;
     }
-
     .result {
       margin-top: 20px;
       font-size: 22px;
@@ -146,27 +141,22 @@ o codigo:
 
   <div class="container">
     <h2>Calculadora Automática</h2>
-
     <input type="number" id="num1" placeholder="0">
     +
     <input type="number" id="num2" placeholder="0">
-
     <div class="result">
       Resultado: <span id="resultado">0</span>
     </div>
   </div>
-
   <script>
     const num1 = document.getElementById('num1');
     const num2 = document.getElementById('num2');
     const resultado = document.getElementById('resultado');
-
     function atualizarResultado() {
       const valor1 = parseFloat(num1.value) || 0;
       const valor2 = parseFloat(num2.value) || 0;
       resultado.textContent = valor1 + valor2;
     }
-
     // Atualiza automaticamente ao digitar
     num1.addEventListener('input', atualizarResultado);
     num2.addEventListener('input', atualizarResultado);
