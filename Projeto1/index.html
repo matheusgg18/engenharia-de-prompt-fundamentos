@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Controle de Gastos</h1>
+            <p>Gerencie seus gastos de forma simples e eficiente</p>
+        </header>
+
+        <main>
+            <!-- Resumo Financeiro -->
+            <section class="resumo">
+                <div class="card resumo-card">
+                    <h2>Resumo Financeiro</h2>
+                    <div class="resumo-grid">
+                        <div class="resumo-item">
+                            <span class="label">Receita Total</span>
+                            <p class="valor valor-positivo">R$ 5.000,00</p>
+                        </div>
+                        <div class="resumo-item">
+                            <span class="label">Gastos Total</span>
+                            <p class="valor valor-negativo">R$ 2.150,50</p>
+                        </div>
+                        <div class="resumo-item">
+                            <span class="label">Saldo</span>
+                            <p class="valor valor-destaque">R$ 2.849,50</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Adicionar Gasto -->
+            <section class="adicionar-gasto">
+                <div class="card">
+                    <h2>Adicionar Gasto</h2>
+                    <form class="form-gasto">
+                        <div class="form-grupo">
+                            <label for="descricao">Descrição</label>
+                            <input type="text" id="descricao" placeholder="Ex: Supermercado" required>
+                        </div>
+
+                        <div class="form-grupo">
+                            <label for="categoria">Categoria</label>
+                            <select id="categoria" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="alimentacao">Alimentação</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="saude">Saúde</option>
+                                <option value="educacao">Educação</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-grupo">
+                            <label for="valor">Valor (R$)</label>
+                            <input type="number" id="valor" placeholder="0,00" step="0.01" min="0" required>
+                        </div>
+
+                        <div class="form-grupo">
+                            <label for="data">Data</label>
+                            <input type="date" id="data" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Adicionar Gasto</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Filtro -->
+            <section class="filtro">
+                <div class="card">
+                    <h2>Filtros</h2>
+                    <div class="filtro-container">
+                        <select id="filtro-categoria" class="filtro-select">
+                            <option value="">Todas as categorias</option>
+                            <option value="alimentacao">Alimentação</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="saude">Saúde</option>
+                            <option value="educacao">Educação</option>
+                            <option value="lazer">Lazer</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                        <input type="month" id="filtro-mes" class="filtro-input">
+                        <button class="btn btn-secundario">Limpar Filtros</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gastos por Categoria -->
+            <section class="gastos-categoria">
+                <div class="card">
+                    <h2>Gastos por Categoria</h2>
+                    <div class="categoria-grid">
+                        <div class="categoria-item">
+                            <div class="categoria-icon">🍔</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Alimentação</span>
+                                <span class="categoria-valor">R$ 850,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">39%</div>
+                        </div>
+                        <div class="categoria-item">
+                            <div class="categoria-icon">🚗</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Transporte</span>
+                                <span class="categoria-valor">R$ 450,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">21%</div>
+                        </div>
+                        <div class="categoria-item">
+                            <div class="categoria-icon">🏥</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Saúde</span>
+                                <span class="categoria-valor">R$ 300,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">14%</div>
+                        </div>
+                        <div class="categoria-item">
+                            <div class="categoria-icon">📚</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Educação</span>
+                                <span class="categoria-valor">R$ 350,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">16%</div>
+                        </div>
+                        <div class="categoria-item">
+                            <div class="categoria-icon">🎬</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Lazer</span>
+                                <span class="categoria-valor">R$ 150,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">7%</div>
+                        </div>
+                        <div class="categoria-item">
+                            <div class="categoria-icon">📦</div>
+                            <div class="categoria-info">
+                                <span class="categoria-nome">Outros</span>
+                                <span class="categoria-valor">R$ 50,00</span>
+                            </div>
+                            <div class="categoria-porcentagem">2%</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Histórico de Gastos -->
+            <section class="historico">
+                <div class="card">
+                    <h2>Histórico de Gastos</h2>
+                    <div class="tabela-container">
+                        <table class="tabela-gastos">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>07/05/2026</td>
+                                    <td>Supermercado</td>
+                                    <td><span class="badge badge-alimentacao">Alimentação</span></td>
+                                    <td>R$ 250,00</td>
+                                    <td>
+                                        <button class="btn-acao btn-editar">✏️</button>
+                                        <button class="btn-acao btn-deletar">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>06/05/2026</td>
+                                    <td>Combustível</td>
+                                    <td><span class="badge badge-transporte">Transporte</span></td>
+                                    <td>R$ 150,00</td>
+                                    <td>
+                                        <button class="btn-acao btn-editar">✏️</button>
+                                        <button class="btn-acao btn-deletar">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>05/05/2026</td>
+                                    <td>Farmácia</td>
+                                    <td><span class="badge badge-saude">Saúde</span></td>
+                                    <td>R$ 120,00</td>
+                                    <td>
+                                        <button class="btn-acao btn-editar">✏️</button>
+                                        <button class="btn-acao btn-deletar">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>04/05/2026</td>
+                                    <td>Curso Online</td>
+                                    <td><span class="badge badge-educacao">Educação</span></td>
+                                    <td>R$ 200,00</td>
+                                    <td>
+                                        <button class="btn-acao btn-editar">✏️</button>
+                                        <button class="btn-acao btn-deletar">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>03/05/2026</td>
+                                    <td>Cinema</td>
+                                    <td><span class="badge badge-lazer">Lazer</span></td>
+                                    <td>R$ 80,00</td>
+                                    <td>
+                                        <button class="btn-acao btn-editar">✏️</button>
+                                        <button class="btn-acao btn-deletar">🗑️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Controle de Gastos. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
