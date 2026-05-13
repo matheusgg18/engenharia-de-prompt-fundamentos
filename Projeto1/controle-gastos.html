@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cor-principal: #808000;
+            --cor-principal-rgb: rgb(128, 128, 0);
+            --cor-fundo-claro: #f5f5f0;
+            --cor-texto-escuro: #2c2c2c;
+            --cor-borda: #d4d4c8;
+            --cor-sucesso: #4caf50;
+            --cor-aviso: #ff9800;
+            --cor-erro: #f44336;
+            --sombra: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cor-fundo-claro) 0%, #ffffff 100%);
+            color: var(--cor-texto-escuro);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--cor-principal) 0%, #a0a000 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: var(--sombra);
+        }
+
+        header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: clamp(1rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            box-shadow: var(--sombra);
+            border-left: 5px solid var(--cor-principal);
+        }
+
+        section h2 {
+            color: var(--cor-principal);
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            border-bottom: 2px solid var(--cor-principal);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--cor-texto-escuro);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        input, textarea, select {
+            padding: 0.75rem;
+            border: 2px solid var(--cor-borda);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--cor-principal);
+            box-shadow: 0 0 0 3px rgba(128, 128, 0, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            background: var(--cor-principal);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #a0a000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(128, 128, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-secundario {
+            background: #666;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-secundario:hover {
+            background: #555;
+        }
+
+        .resumo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-resumo {
+            background: linear-gradient(135deg, var(--cor-principal) 0%, #a0a000 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            transition: transform 0.3s ease;
+        }
+
+        .card-resumo:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-resumo h3 {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .card-resumo .valor {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: bold;
+        }
+
+        .gastos-list {
+            list-style: none;
+        }
+
+        .gasto-item {
+            background: var(--cor-fundo-claro);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--cor-principal);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .gasto-item:hover {
+            box-shadow: 0 3px 10px rgba(128, 128, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .gasto-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .gasto-categoria {
+            display: inline-block;
+            background: var(--cor-principal);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .gasto-periodo {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .gasto-observacao {
+            font-style: italic;
+            color: #555;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .gasto-valor {
+            font-weight: bold;
+            color: var(--cor-principal);
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            text-align: right;
+        }
+
+        .gasto-acoes {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .btn-deletar {
+            background: var(--cor-erro);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-deletar:hover {
+            background: #d32f2f;
+        }
+
+        .lista-vazia {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .filtro-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            section {
+                padding: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .gasto-item {
+                flex-direction: column;
+            }
+
+            .gasto-acoes {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .resumo-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .gasto-item {
+                padding: 0.75rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .alerta {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alerta.sucesso {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            display: block;
+        }
+
+        .alerta.erro {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💰 Controle de Gastos</h1>
+        <p>Gerencie seus gastos diários, semanais e mensais de forma eficiente</p>
+    </header>
+
+    <main>
+        <!-- Seção de Entrada de Gastos -->
+        <section id="secaoGastos">
+            <h2>Registrar Novo Gasto</h2>
+            
+            <div class="alerta" id="alerta"></div>
+
+            <form id="formularioGasto" onsubmit="adicionarGasto(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="valor">Valor do Gasto (R$) *</label>
+                        <input type="number" id="valor" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoria *</label>
+                        <select id="categoria" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Alimentação">Alimentação</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Educação">Educação</option>
+                            <option value="Lazer">Lazer</option>
+                            <option value="Utilidades">Utilidades</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="periodo">Período *</label>
+                        <select id="periodo" required>
+                            <option value="">Selecione o período</option>
+                            <option value="Diário">Diário</option>
+                            <option value="Semanal">Semanal</option>
+                            <option value="Mensal">Mensal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacao">Observação ou Descrição</label>
+                    <textarea id="observacao" placeholder="Digite uma observação sobre o gasto (opcional)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Data *</label>
+                    <input type="date" id="data" required>
+                </div>
+
+                <button type="submit">Adicionar Gasto</button>
+            </form>
+        </section>
+
+        <!-- Seção de Resumo -->
+        <section>
+            <h2>Resumo de Gastos</h2>
+            <div class="resumo-container">
+                <div class="card-resumo">
+                    <h3>Gastos Diários</h3>
+                    <div class="valor" id="totalDiario">R$ 0,00</div>
+                </div>
+                <div class="card-resumo">
+                    <h3>Gastos Semanais</h3>
+                    <div class="valor" id="totalSemanal">R$ 0,00</div>
+                </div>
+                <div class="card-resumo">
+                    <h3>Gastos Mensais</h3>
+                    <div class="valor" id="totalMensal">R$ 0,00</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Filtros e Lista -->
+        <section>
+            <h2>Lista de Gastos</h2>
+            
+            <div class="filtro-container">
+                <div class="form-group">
+                    <label for="filtroCategoria">Filtrar por Categoria</label>
+                    <select id="filtroCategoria" onchange="filtrarGastos()">
+                        <option value="">Todas as categorias</option>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Lazer">Lazer</option>
+                        <option value="Utilidades">Utilidades</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filtroPeriodo">Filtrar por Período</label>
+                    <select id="filtroPeriodo" onchange="filtrarGastos()">
+                        <option value="">Todos os períodos</option>
+                        <option value="Diário">Diário</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensal">Mensal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="btnLimpar"></label>
+                    <button type="button" class="btn-secundario" onclick="limparFiltros()" style="margin-top: 1.9rem;">Limpar Filtros</button>
+                </div>
+            </div>
+
+            <ul class="gastos-list" id="listaGastos">
+                <li class="lista-vazia">Nenhum gasto registrado ainda. Comece adicionando um!</li>
+            </ul>
+        </section>
+
+        <!-- Seção de Ações -->
+        <section>
+            <h2>Ações</h2>
+            <div class="form-row">
+                <button type="button" onclick="exportarDados()">📥 Exportar Dados</button>
+                <button type="button" class="btn-secundario" onclick="limparTodos()">🗑️ Limpar Todos os Gastos</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Controle de Gastos - Desenvolvido com ❤️</p>
+    </footer>
+
+    <script>
+        // Estrutura de dados dos gastos
+        let gastos = [];
+
+        // Carregar dados do localStorage ao iniciar
+        function carregarDados() {
+            const dadosSalvos = localStorage.getItem('gastos');
+            if (dadosSalvos) {
+                gastos = JSON.parse(dadosSalvos);
+                atualizarInterface();
+            }
+            // Definir data padrão como hoje
+            document.getElementById('data').valueAsDate = new Date();
+        }
+
+        // Salvar dados no localStorage
+        function salvarDados() {
+            localStorage.setItem('gastos', JSON.stringify(gastos));
+        }
+
+        // Adicionar novo gasto
+        function adicionarGasto(event) {
+            event.preventDefault();
+
+            const valor = parseFloat(document.getElementById('valor').value);
+            const categoria = document.getElementById('categoria').value;
+            const periodo = document.getElementById('periodo').value;
+            const observacao = document.getElementById('observacao').value;
+            const data = document.getElementById('data').value;
+
+            if (!valor || valor <= 0) {
+                exibirAlerta('Por favor, insira um valor válido!', 'erro');
+                return;
+            }
+
+            const novoGasto = {
+                id: Date.now(),
+                valor,
+                categoria,
+                periodo,
+                observacao,
+                data,
+                dataCriacao: new Date().toLocaleString('pt-BR')
+            };
+
+            gastos.push(novoGasto);
+            salvarDados();
+            atualizarInterface();
+
+            // Limpar formulário
+            document.getElementById('formularioGasto').reset();
+            document.getElementById('data').valueAsDate = new Date();
+
+            exibirAlerta('Gasto adicionado com sucesso!', 'sucesso');
+        }
+
+        // Deletar gasto
+        function deletarGasto(id) {
+            if (confirm('Tem certeza que deseja deletar este gasto?')) {
+                gastos = gastos.filter(g => g.id !== id);
+                salvarDados();
+                atualizarInterface();
+                exibirAlerta('Gasto deletado com sucesso!', 'sucesso');
+            }
+        }
+
+        // Calcular totais
+        function calcularTotais() {
+            const hoje = new Date();
+            const diaHoje = hoje.getDate();
+            const mesHoje = hoje.getMonth();
+            const anoHoje = hoje.getFullYear();
+
+            // Semana começa no domingo
+            const diaSemanaBoje = hoje.getDay();
+            const dataInicioSemana = new Date(hoje);
+            dataInicioSemana.setDate(hoje.getDate() - diaSemanaBoje);
+
+            let totalDiario = 0;
+            let totalSemanal = 0;
+            let totalMensal = 0;
+
+            gastos.forEach(gasto => {
+                const dataGasto = new Date(gasto.data);
+                const diaGasto = dataGasto.getDate();
+                const mesGasto = dataGasto.getMonth();
+                const anoGasto = dataGasto.getFullYear();
+
+                // Diário
+                if (diaGasto === diaHoje && mesGasto === mesHoje && anoGasto === anoHoje) {
+                    totalDiario += gasto.valor;
+                }
+
+                // Semanal
+                if (dataGasto >= dataInicioSemana && dataGasto <= hoje) {
+                    totalSemanal += gasto.valor;
+                }
+
+                // Mensal
+                if (mesGasto === mesHoje && anoGasto === anoHoje) {
+                    totalMensal += gasto.valor;
+                }
+            });
+
+            return {
+                diario: totalDiario.toFixed(2),
+                semanal: totalSemanal.toFixed(2),
+                mensal: totalMensal.toFixed(2)
+            };
+        }
+
+        // Atualizar cards de resumo
+        function atualizarResumo() {
+            const totais = calcularTotais();
+            document.getElementById('totalDiario').textContent = `R$ ${parseFloat(totais.diario).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById('totalSemanal').textContent = `R$ ${parseFloat(totais.semanal).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById('totalMensal').textContent = `R$ ${parseFloat(totais.mensal).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+        }
+
+        // Atualizar lista de gastos
+        function atualizarLista() {
+            const listaGastos = document.getElementById('listaGastos');
+            
+            if (gastos.length === 0) {
+                listaGastos.innerHTML = '<li class="lista-vazia">Nenhum gasto registrado ainda. Comece adicionando um!</li>';
+                return;
+            }
+
+            // Ordenar gastos por data (mais recentes primeiro)
+            const gastosOrdenados = [...gastos].sort((a, b) => new Date(b.data) - new Date(a.data));
+
+            listaGastos.innerHTML = gastosOrdenados.map(gasto => `
+                <li class="gasto-item">
+                    <div class="gasto-info">
+                        <span class="gasto-categoria">${gasto.categoria}</span>
+                        <div class="gasto-periodo">📅 ${new Date(gasto.data).toLocaleDateString('pt-BR')} (${gasto.periodo})</div>
+                        ${gasto.observacao ? `<div class="gasto-observacao">📝 ${gasto.observacao}</div>` : ''}
+                    </div>
+                    <div class="gasto-valor">R$ ${parseFloat(gasto.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+                    <div class="gasto-acoes">
+                        <button type="button" class="btn-deletar" onclick="deletarGasto(${gasto.id})">Deletar</button>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Filtrar gastos
+        function filtrarGastos() {
+            const categoria = document.getElementById('filtroCategoria').value;
+            const periodo = document.getElementById('filtroPeriodo').value;
+            const listaGastos = document.getElementById('listaGastos');
+
+            let gastosFiltrados = gastos.filter(gasto => {
+                return (categoria === '' || gasto.categoria === categoria) &&
+                       (periodo === '' || gasto.periodo === periodo);
+            });
+
+            if (gastosFiltrados.length === 0) {
+                listaGastos.innerHTML = '<li class="lista-vazia">Nenhum gasto encontrado com esses filtros.</li>';
+                return;
+            }
+
+            const gastosOrdenados = [...gastosFiltrados].sort((a, b) => new Date(b.data) - new Date(a.data));
+
+            listaGastos.innerHTML = gastosOrdenados.map(gasto => `
+                <li class="gasto-item">
+                    <div class="gasto-info">
+                        <span class="gasto-categoria">${gasto.categoria}</span>
+                        <div class="gasto-periodo">📅 ${new Date(gasto.data).toLocaleDateString('pt-BR')} (${gasto.periodo})</div>
+                        ${gasto.observacao ? `<div class="gasto-observacao">📝 ${gasto.observacao}</div>` : ''}
+                    </div>
+                    <div class="gasto-valor">R$ ${parseFloat(gasto.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+                    <div class="gasto-acoes">
+                        <button type="button" class="btn-deletar" onclick="deletarGasto(${gasto.id})">Deletar</button>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Limpar filtros
+        function limparFiltros() {
+            document.getElementById('filtroCategoria').value = '';
+            document.getElementById('filtroPeriodo').value = '';
+            atualizarLista();
+        }
+
+        // Limpar todos os gastos
+        function limparTodos() {
+            if (confirm('ATENÇÃO: Você está prestes a deletar TODOS os gastos. Esta ação não pode ser desfeita. Tem certeza?')) {
+                gastos = [];
+                salvarDados();
+                atualizarInterface();
+                exibirAlerta('Todos os gastos foram deletados!', 'sucesso');
+            }
+        }
+
+        // Exportar dados como JSON
+        function exportarDados() {
+            if (gastos.length === 0) {
+                exibirAlerta('Nenhum gasto para exportar!', 'erro');
+                return;
+            }
+
+            const totais = calcularTotais();
+            const dadosExportacao = {
+                dataExportacao: new Date().toLocaleString('pt-BR'),
+                totais: {
+                    diario: totais.diario,
+                    semanal: totais.semanal,
+                    mensal: totais.mensal
+                },
+                gastos: gastos
+            };
+
+            const elemento = document.createElement('a');
+            elemento.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(dadosExportacao, null, 2)));
+            elemento.setAttribute('download', `gastos_${new Date().toISOString().split('T')[0]}.json`);
+            elemento.style.display = 'none';
+            document.body.appendChild(elemento);
+            elemento.click();
+            document.body.removeChild(elemento);
+
+            exibirAlerta('Dados exportados com sucesso!', 'sucesso');
+        }
+
+        // Exibir alertas
+        function exibirAlerta(mensagem, tipo) {
+            const alerta = document.getElementById('alerta');
+            alerta.textContent = mensagem;
+            alerta.className = `alerta ${tipo}`;
+            
+            setTimeout(() => {
+                alerta.className = 'alerta';
+            }, 3000);
+        }
+
+        // Atualizar interface completa
+        function atualizarInterface() {
+            atualizarResumo();
+            atualizarLista();
+        }
+
+        // Inicializar aplicação
+        window.addEventListener('DOMContentLoaded', carregarDados);
+    </script>
+</body>
+</html>
